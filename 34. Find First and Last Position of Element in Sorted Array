@@ -1,0 +1,32 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) 
+    {
+        int size = nums.size();
+        if(size == 0)
+            return std::vector<int> {-1, -1};
+        int e = size - 1, mid = 0, s = 0;
+        if(nums[s] == target && nums[e] == target)
+            return std::vector<int> {s, e};
+        while(s < e)
+        {
+            mid = s + (e - s) / 2;
+            if(nums[mid] < target)
+            {
+                    s = mid + 1;
+            }
+            else e = mid;
+        }
+        int l = -1, r = -1, tmp = s;
+        while(s < size && nums[s] == target)
+        {
+            s++;
+        }
+        if(nums[tmp] == target)
+        {
+            l = tmp;
+            r = s - 1;
+        }
+        return std::vector<int> {l, r};
+    }
+};
