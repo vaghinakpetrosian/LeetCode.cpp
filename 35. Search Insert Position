@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int searchInsert(vector<int>& nums, int tar) 
+    {
+        int s = 0;
+        int e = nums.size();
+        int mid = 0;
+        while(s < e)
+        {
+            mid = s + (e - s) / 2;
+            if(nums[mid] < tar)
+            {
+                s = mid + 1;
+            }
+            else
+                e = mid;
+        }
+        return s;
+    }
+};
