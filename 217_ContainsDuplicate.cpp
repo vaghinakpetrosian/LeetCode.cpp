@@ -1,3 +1,21 @@
+// class Solution {
+// public:
+//     bool containsDuplicate(vector<int>& nums) 
+//     {
+//         unordered_set<int> m;
+//         int n = nums.size();
+//         for(int i = 0; i < n; ++i)
+//         {
+//             m.insert(nums[i]);
+//             if(i + 1 != m.size())
+//             {
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+// };
+
 class Solution {
 public:
     void swap(int& a, int& b)
