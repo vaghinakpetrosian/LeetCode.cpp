@@ -12,8 +12,8 @@ public:
         while (r < n)
         {
             if (arr[s[r] - 'A'] > 0) 
-                have++;
-            arr[s[r] - 'A']--;
+                ++have;
+            --arr[s[r] - 'A'];
             while (have == m) 
             {
                 if (r - l + 1 < minLen) 
@@ -21,12 +21,12 @@ public:
                     minLen = r - l + 1;
                     resl = l;
                 }
-                arr[s[l] - 'A']++;
+                ++arr[s[l] - 'A'];
                 if (arr[s[l] - 'A'] > 0) 
-                    have--; 
-                l++;
+                    --have; 
+                ++l;
             }
-            r++;
+            ++r;
         }
         return minLen == INT_MAX ? "" : s.substr(resl, minLen);
     }
