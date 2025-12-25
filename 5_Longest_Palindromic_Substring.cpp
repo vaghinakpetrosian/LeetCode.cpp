@@ -90,40 +90,78 @@
 //     }
 // };
 
-class Solution
-{
-public:
-    string longestPalindrome(string s)
-    {
-        int n = s.length();
-        int maxm = 0, idx = -1;
+// class Solution
+// {
+// public:
+//     string longestPalindrome(string s)
+//     {
+//         int n = s.length();
+//         int maxm = 0, idx = -1;
 
-        for (int i = 0; i < n; i++)
-        {
-            int l = i, r = i;
-            while (l >= 0 && r < n && s[l] == s[r])
-            {
-                if ((r - l + 1) > maxm)
-                {
-                    maxm = r - l + 1;
-                    idx = l;
-                }
-                l--;
-                r++;
-            }
-            l = i;
-            r = i + 1;
-            while (l >= 0 && r < n && s[l] == s[r])
-            {
-                if ((r - l + 1) > maxm)
-                {
-                    maxm = r - l + 1;
-                    idx = l;
-                }
-                l--;
-                r++;
+//         for (int i = 0; i < n; i++)
+//         {
+//             int l = i, r = i;
+//             while (l >= 0 && r < n && s[l] == s[r])
+//             {
+//                 if ((r - l + 1) > maxm)
+//                 {
+//                     maxm = r - l + 1;
+//                     idx = l;
+//                 }
+//                 l--;
+//                 r++;
+//             }
+//             l = i;
+//             r = i + 1;
+//             while (l >= 0 && r < n && s[l] == s[r])
+//             {
+//                 if ((r - l + 1) > maxm)
+//                 {
+//                     maxm = r - l + 1;
+//                     idx = l;
+//                 }
+//                 l--;
+//                 r++;
+//             }
+//         }
+//         return s.substr(idx, maxm);
+//     }
+// };
+
+// Manchester's algorithm
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        string t = "^";
+        for (char c : s) {
+            t += '#';
+            t += c;
+        }
+        t += "#$";
+        int n = t.length();
+        vector<int> P(n, 0);
+        int C = 0, R = 0;
+        for (int i = 1; i < n - 1; i++) {
+            int i_mirror = 2 * C - i;
+            if (i < R)
+                P[i] = min(R - i, P[i_mirror]);
+            while (t[i + 1 + P[i]] == t[i - 1 - P[i]])
+                P[i]++;
+            if (i + P[i] > R) {
+                C = i;
+                R = i + P[i];
             }
         }
-        return s.substr(idx, maxm);
+        int maxLen = 0;
+        int centerIndex = 0;
+        for (int i = 1; i < n - 1; i++) {
+            if (P[i] > maxLen) {
+                maxLen = P[i];
+                centerIndex = i;
+            }
+        }
+
+        int start = (centerIndex - maxLen) / 2;
+        return s.substr(start, maxLen);
     }
 };
