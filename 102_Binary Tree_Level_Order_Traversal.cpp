@@ -17,11 +17,11 @@ public:
             return vector<vector<int>>{};
         std::queue<TreeNode*> tmp{};
         tmp.push(root);
-        int level = 0;
+        short level = 0;
         std::vector<vector<int>> res;
         while(!tmp.empty())
         {
-            int size = tmp.size();
+            short size = tmp.size();
             res.push_back(std::vector<int>(size, 0));
             while(size)
             {
