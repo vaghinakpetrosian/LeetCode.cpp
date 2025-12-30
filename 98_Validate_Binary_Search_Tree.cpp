@@ -40,7 +40,7 @@
 class Solution {
 public:
     bool isValidBST(TreeNode* root) {
-        return valid(root, std::numeric_limits<long long>::min(), std::numeric_limits<long long>::max());
+        return valid(root, LLONG_MIN, LLONG_MAX);
     }
 private:
     bool valid(TreeNode* node, long long left, long long right) {
